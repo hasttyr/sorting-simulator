@@ -24,6 +24,7 @@
   justify-content: center;
   transition: color 0.25s ease;
   flex-shrink: 0;
+  color: var(--text-dim);
 }
 
 .bar-container {
@@ -36,13 +37,14 @@
 
 .bar {
   width: 100%;
-  border-radius: 2px 2px 0 0;
-  border: 1px solid transparent;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
               background 0.25s ease,
               box-shadow 0.25s ease;
   position: relative;
   min-height: 3px;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 40%);
 }
 
 .bar-active-anim {
@@ -68,4 +70,5 @@
 
 .bar-wrapper.active .bar {
   z-index: 2;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 24px rgba(0, 0, 0, 0.18);
 }

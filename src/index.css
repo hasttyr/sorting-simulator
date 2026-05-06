@@ -5,46 +5,59 @@
 }
 
 :root {
-  --bg: #0a0a0f;
-  --bg2: #111118;
-  --bg3: #1a1a26;
-  --surface: #1e1e2e;
-  --surface2: #252535;
-  --border: #2e2e45;
-  --border-bright: #4a4a6a;
+  --bg: #080b12;
+  --bg2: #101521;
+  --bg3: #171d2d;
+  --surface: rgba(20, 25, 39, 0.92);
+  --surface2: rgba(28, 34, 53, 0.96);
+  --border: #2a3248;
+  --border-bright: #506085;
 
-  --accent-counting: #00d4ff;
-  --accent-bucket: #ff6b35;
-  --accent-radix: #a855f7;
+  --accent-counting: #45d7ff;
+  --accent-bucket: #ff8a5b;
+  --accent-radix: #b98cff;
 
-  --text: #e8e8f0;
-  --text-dim: #8888aa;
-  --text-muted: #4a4a6a;
+  --text: #edf2ff;
+  --text-dim: #97a2bf;
+  --text-muted: #62708f;
 
-  --bar-default: #2e2e4a;
-  --bar-active: #00d4ff;
-  --bar-compare: #ff6b35;
-  --bar-sorted: #22c55e;
-  --bar-pivot: #a855f7;
+  --bar-default: #2f3a56;
+  --bar-active: #45d7ff;
+  --bar-compare: #ff8a5b;
+  --bar-sorted: #2dd4bf;
+  --bar-pivot: #b98cff;
 
   --font-display: 'Syne', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  --radius: 4px;
-  --radius-lg: 8px;
+  --radius: 8px;
+  --radius-lg: 18px;
 
-  --shadow: 0 4px 24px rgba(0,0,0,0.5);
-  --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.3);
-  --glow-orange: 0 0 20px rgba(255, 107, 53, 0.3);
-  --glow-purple: 0 0 20px rgba(168, 85, 247, 0.3);
+  --shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+  --glow-cyan: 0 0 22px rgba(69, 215, 255, 0.28);
+  --glow-orange: 0 0 22px rgba(255, 138, 91, 0.28);
+  --glow-purple: 0 0 22px rgba(185, 140, 255, 0.28);
 }
 
 html, body, #root {
   height: 100%;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top left, rgba(69, 215, 255, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(185, 140, 255, 0.08), transparent 30%),
+    linear-gradient(180deg, #090d16 0%, var(--bg) 40%, #070a10 100%);
   color: var(--text);
   font-family: var(--font-mono);
   overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+}
+
+::selection {
+  background: rgba(69, 215, 255, 0.26);
+  color: var(--text);
 }
 
 ::-webkit-scrollbar {
@@ -79,5 +92,5 @@ input, textarea {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.4;
+  opacity: 0.3;
 }
