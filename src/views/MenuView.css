@@ -1,0 +1,189 @@
+.menu-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 24px 40px;
+  background: var(--bg);
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.menu-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.menu-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.menu-title-accent {
+  color: var(--accent-counting);
+}
+
+.menu-subtitle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  max-width: 420px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.menu-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--border-bright);
+  margin: 0 auto;
+}
+
+.menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.algo-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  animation: slideUp 0.5s ease both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.algo-card:hover, .algo-card.hovered {
+  border-color: var(--accent);
+  background: var(--surface2);
+  transform: translateX(4px);
+}
+
+.algo-card-number {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  min-width: 24px;
+}
+
+.algo-card-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.algo-card:hover .algo-card-icon {
+  transform: scale(1.1);
+}
+
+.algo-card-content {
+  flex: 1;
+}
+
+.algo-card-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.algo-card-tagline {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.algo-card-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.algo-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.algo-badge.stable {
+  border-color: #22c55e44;
+  color: #22c55e;
+}
+
+.algo-card-arrow {
+  font-size: 20px;
+  color: var(--text-muted);
+  transition: all 0.25s ease;
+  transform: translateX(-4px);
+}
+
+.algo-card:hover .algo-card-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.algo-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 100% 50%, var(--accent), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.algo-card:hover .algo-card-glow {
+  opacity: 0.04;
+}
+
+.menu-footer {
+  margin-top: 56px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.dot {
+  color: var(--border-bright);
+}
