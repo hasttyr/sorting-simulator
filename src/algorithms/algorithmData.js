@@ -3,7 +3,7 @@ export const ALGORITHMS = {
     id: 'counting',
     name: 'Counting Sort',
     tagline: 'El poder del conteo directo',
-    accent: 'var(--accent-counting)',
+    accent: '#45d7ff',
     complexity: {
       time: 'O(n + k)',
       space: 'O(k)',
@@ -48,7 +48,7 @@ export const ALGORITHMS = {
     id: 'bucket',
     name: 'Bucket Sort',
     tagline: 'Divide y vencerás por rangos',
-    accent: 'var(--accent-bucket)',
+    accent: '#ff8a5b',
     complexity: {
       time: 'O(n + k)',
       space: 'O(n + k)',
@@ -93,7 +93,7 @@ export const ALGORITHMS = {
     id: 'radix',
     name: 'Radix Sort',
     tagline: 'Ordenar dígito por dígito',
-    accent: 'var(--accent-radix)',
+    accent: '#b98cff',
     complexity: {
       time: 'O(d × (n + k))',
       space: 'O(n + k)',

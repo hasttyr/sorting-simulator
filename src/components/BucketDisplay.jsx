@@ -1,34 +1,32 @@
-import './BucketDisplay.css';
-
 export default function BucketDisplay({ buckets, activeBucket, sortedBuckets = [], labels, accent }) {
   if (!buckets) return null;
 
   return (
-    <div className="bucket-display">
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {buckets.map((bucket, i) => {
         const isActive = activeBucket === i;
         const isSorted = sortedBuckets.includes(i);
-        const color = isSorted ? '#22c55e' : isActive ? accent : 'var(--border)';
+        const color = isSorted ? '#22c55e' : isActive ? accent : '#334155';
 
         return (
           <div
             key={i}
-            className={`bucket ${isActive ? 'bucket-active' : ''} ${isSorted ? 'bucket-sorted' : ''}`}
-            style={{ '--bcolor': color }}
+            className={`rounded-2xl border bg-slate-950/70 p-4 shadow-lg shadow-black/20 backdrop-blur transition-transform duration-300 ${isActive ? 'scale-[1.01]' : ''} ${isSorted ? 'ring-1 ring-emerald-400/40' : ''}`}
+            style={{ borderColor: color }}
           >
-            <div className="bucket-label" style={{ color }}>
+            <div className="mb-3 text-sm font-semibold uppercase tracking-[0.24em]" style={{ color }}>
               {labels ? labels[i] : i}
             </div>
-            <div className="bucket-body">
+            <div className="min-h-[5rem] rounded-xl border border-slate-800/80 bg-slate-950/60 p-3">
               {bucket.length === 0 ? (
-                <div className="bucket-empty">∅</div>
+                <div className="flex min-h-[3rem] items-center justify-center text-sm text-slate-500">∅</div>
               ) : (
-                <div className="bucket-items">
+                <div className="flex flex-wrap gap-2">
                   {bucket.map((val, j) => (
                     <div
                       key={j}
-                      className={`bucket-item ${isActive && j === bucket.length - 1 ? 'bucket-item-new' : ''}`}
-                      style={{ borderColor: isActive && j === bucket.length - 1 ? accent : 'var(--border)' }}
+                      className={`min-w-[2.75rem] rounded-lg border px-3 py-1.5 text-center text-sm font-semibold text-slate-100 transition-all duration-300 ${isActive && j === bucket.length - 1 ? 'scale-105' : ''}`}
+                      style={{ borderColor: isActive && j === bucket.length - 1 ? accent : '#334155' }}
                     >
                       {val}
                     </div>

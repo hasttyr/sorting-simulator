@@ -6,7 +6,6 @@ import { generateRadixSortSteps } from '../algorithms/radixSort.js';
 import ArrayBars from '../components/ArrayBars.jsx';
 import BucketDisplay from '../components/BucketDisplay.jsx';
 import CountDisplay from '../components/CountDisplay.jsx';
-import './SimulatorView.css';
 
 const DEFAULT_ARRAYS = {
   counting: [4, 2, 7, 1, 5, 3, 8, 6, 2, 4],
@@ -127,37 +126,37 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
   const { highlights, sorted } = getHighlightProps();
 
   return (
-    <div className="sim-view" style={{ '--accent': algo.accent }}>
-      {/* Nav */}
-      <nav className="sim-nav">
-        <button className="nav-btn" onClick={onBack}>← Explicación</button>
-        <div className="nav-breadcrumb">
-          <span className="nav-dim">SortLab</span>
-          <span className="nav-sep">/</span>
-          <span style={{ color: algo.accent }}>{algo.name}</span>
-          <span className="nav-sep">/</span>
-          <span className="nav-dim">Simulador</span>
+    <div className="mx-auto min-h-screen w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+      <nav className="mb-6 rounded-2xl border border-slate-800/80 bg-slate-950/80 px-4 py-3 shadow-glow backdrop-blur sm:px-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <button className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800" onClick={onBack}>← Explicación</button>
+          <div className="text-sm font-medium text-slate-400">
+            <span className="text-slate-500">SortLab</span>
+            <span className="px-2 text-slate-600">/</span>
+            <span style={{ color: algo.accent }}>{algo.name}</span>
+            <span className="px-2 text-slate-600">/</span>
+            <span className="text-slate-500">Simulador</span>
+          </div>
+          <button className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800" onClick={onMenu}>Menú ⊞</button>
         </div>
-        <button className="nav-btn" onClick={onMenu}>Menú ⊞</button>
       </nav>
 
-      <div className="sim-layout">
-        {/* Left panel: input */}
-        <aside className="sim-sidebar">
-          <div className="sidebar-section">
-            <div className="sidebar-label">Arreglo de entrada</div>
+      <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <aside className="space-y-6 rounded-3xl border border-slate-800/80 bg-slate-950/70 p-5 shadow-glow backdrop-blur sm:p-6">
+          <div className="space-y-4 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Arreglo de entrada</div>
             <textarea
-              className="array-input"
+              className="min-h-[96px] w-full rounded-2xl border border-slate-700 bg-slate-950/80 p-4 text-sm text-slate-100 outline-none transition-colors placeholder:text-slate-500 focus:border-slate-500"
               value={inputText}
               onChange={e => { setInputText(e.target.value); setStarted(false); }}
               placeholder="Ej: 5, 3, 8, 1, 9, 2"
               rows={3}
               style={{ borderColor: error ? '#f87171' : undefined }}
             />
-            {error && <div className="input-error">{error}</div>}
-            <div className="input-actions">
-              <button className="btn-outline" onClick={handleRandom}>⟳ Aleatorio</button>
-              <button className="btn-outline" onClick={() => fileInputRef.current?.click()}>
+            {error && <div className="rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div>}
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <button className="rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800" onClick={handleRandom}>⟳ Aleatorio</button>
+              <button className="rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800" onClick={() => fileInputRef.current?.click()}>
                 ↑ Cargar CSV
               </button>
               <input
@@ -169,7 +168,7 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
               />
             </div>
             <button
-              className="btn-primary"
+              className="w-full rounded-2xl px-5 py-3 text-sm font-bold text-slate-950 transition-transform hover:scale-[1.01]"
               onClick={handleStart}
               style={{ background: algo.accent }}
             >
@@ -178,10 +177,10 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
           </div>
 
           {started && (
-            <div className="sidebar-section">
-              <div className="sidebar-label">Velocidad</div>
-              <div className="speed-control">
-                <span className="speed-label">Lento</span>
+            <div className="space-y-4 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Velocidad</div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Lento</span>
                 <input
                   type="range"
                   min={150}
@@ -189,31 +188,28 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                   step={50}
                   value={1650 - playSpeed}
                   onChange={e => setPlaySpeed(1650 - Number(e.target.value))}
-                  className="speed-slider"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-800 accent-current"
                   style={{ accentColor: algo.accent }}
                 />
-                <span className="speed-label">Rápido</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Rápido</span>
               </div>
             </div>
           )}
 
           {started && (
-            <div className="sidebar-section">
-              <div className="sidebar-label">Info del paso</div>
-              <div className="step-phase" style={{ color: algo.accent }}>
+            <div className="space-y-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Info del paso</div>
+              <div className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: algo.accent }}>
                 {step?.phase?.toUpperCase().replace(/_/g, ' ')}
               </div>
-              <div className="step-progress">
+              <div className="text-sm text-slate-300">
                 Paso {stepIdx + 1} / {steps.length}
               </div>
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${((stepIdx + 1) / steps.length) * 100}%`, background: algo.accent }}
-                />
+              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                <div className="h-full rounded-full" style={{ width: `${((stepIdx + 1) / steps.length) * 100}%`, background: algo.accent }} />
               </div>
               {isDone && (
-                <div className="done-badge" style={{ borderColor: algo.accent, color: algo.accent }}>
+                <div className="rounded-xl border px-3 py-2 text-sm font-semibold" style={{ borderColor: algo.accent, color: algo.accent }}>
                   ✓ Ordenamiento completado
                 </div>
               )}
@@ -221,42 +217,39 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
           )}
 
           {started && (
-            <div className="sidebar-section">
-              <div className="sidebar-label">Leyenda</div>
-              <div className="legend">
-                <div className="legend-item"><span className="legend-dot" style={{ background: algo.accent }} /> Elemento activo</div>
-                <div className="legend-item"><span className="legend-dot" style={{ background: '#22c55e' }} /> Ordenado</div>
-                <div className="legend-item"><span className="legend-dot" style={{ background: '#ff6b35' }} /> Comparando</div>
-                <div className="legend-item"><span className="legend-dot" style={{ background: 'var(--bar-default)' }} /> Sin procesar</div>
+            <div className="space-y-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Leyenda</div>
+              <div className="space-y-2 text-sm text-slate-300">
+                <div className="flex items-center gap-3"><span className="h-3 w-3 rounded-full" style={{ background: algo.accent }} /> Elemento activo</div>
+                <div className="flex items-center gap-3"><span className="h-3 w-3 rounded-full bg-emerald-400" /> Ordenado</div>
+                <div className="flex items-center gap-3"><span className="h-3 w-3 rounded-full bg-orange-400" /> Comparando</div>
+                <div className="flex items-center gap-3"><span className="h-3 w-3 rounded-full bg-slate-500" /> Sin procesar</div>
               </div>
             </div>
           )}
         </aside>
 
-        {/* Main area */}
-        <main className="sim-main">
+        <main className="space-y-6 rounded-3xl border border-slate-800/80 bg-slate-950/70 p-5 shadow-glow backdrop-blur sm:p-6">
           {!started ? (
-            <div className="sim-empty">
-              <div className="sim-empty-icon" style={{ color: algo.accent }}>⊳</div>
-              <div className="sim-empty-text">Configura el arreglo y presiona <strong>Iniciar</strong></div>
-              <div className="sim-empty-sub">Puedes ingresar valores manualmente, generar uno aleatorio o cargar un archivo .csv</div>
+            <div className="flex min-h-[60vh] flex-col items-center justify-center rounded-3xl border border-dashed border-slate-700/80 bg-slate-950/50 px-6 py-16 text-center">
+              <div className="text-5xl font-black" style={{ color: algo.accent }}>⊳</div>
+              <div className="mt-4 text-xl font-bold text-slate-50">Configura el arreglo y presiona Iniciar</div>
+              <div className="mt-3 max-w-xl text-sm leading-7 text-slate-400">Puedes ingresar valores manualmente, generar uno aleatorio o cargar un archivo .csv.</div>
             </div>
           ) : (
             <>
-              {/* Description panel */}
-              <div className="step-description" style={{ borderColor: algo.accent + '44' }}>
-                <div className="step-desc-main">{step?.description}</div>
+              <div className="rounded-2xl border bg-slate-950/70 p-4" style={{ borderColor: `${algo.accent}44` }}>
+                <div className="text-base font-semibold text-slate-100">{step?.description}</div>
                 {step?.subDescription && (
-                  <div className="step-desc-sub">{step?.subDescription}</div>
+                  <div className="mt-2 text-sm leading-6 text-slate-400">{step?.subDescription}</div>
                 )}
               </div>
 
-              {/* Main array visualization */}
-              <div className="viz-section">
-                <div className="viz-label">
+              <div className="space-y-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+                <div className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">
                   {step?.phase === 'placing' || step?.phase === 'output_start' ? 'Arreglo original' : 'Arreglo'}
                 </div>
-                <div className="bars-container">
+                <div className="h-[320px] w-full rounded-2xl border border-slate-800/80 bg-slate-950/60 p-3 sm:h-[380px]">
                   <ArrayBars
                     array={step?.array || []}
                     highlights={highlights}
@@ -267,11 +260,10 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 </div>
               </div>
 
-              {/* Output array for counting sort */}
               {algorithmId === 'counting' && step?.output && (
-                <div className="viz-section">
-                  <div className="viz-label">Arreglo de salida</div>
-                  <div className="bars-container" style={{ height: '120px' }}>
+                <div className="space-y-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+                  <div className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Arreglo de salida</div>
+                  <div className="h-[140px] rounded-2xl border border-slate-800/80 bg-slate-950/60 p-3">
                     <ArrayBars
                       array={step.output.map(v => v === null ? 0 : v)}
                       highlights={step.outputHighlight !== undefined ? [step.outputHighlight] : []}
@@ -280,10 +272,13 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                       maxVal={maxVal}
                     />
                   </div>
-                  <div className="output-raw">
+                  <div className="flex flex-wrap gap-2">
                     {step.output.map((v, i) => (
-                      <span key={i} className={`output-cell ${step.outputHighlight === i ? 'output-cell-active' : ''}`}
-                        style={{ borderColor: step.outputHighlight === i ? algo.accent : undefined, color: step.outputHighlight === i ? algo.accent : undefined }}>
+                      <span
+                        key={i}
+                        className={`min-w-[2.75rem] rounded-xl border px-3 py-2 text-center text-sm font-semibold ${step.outputHighlight === i ? 'scale-105' : ''}`}
+                        style={{ borderColor: step.outputHighlight === i ? algo.accent : '#334155', color: step.outputHighlight === i ? algo.accent : '#e2e8f0' }}
+                      >
                         {v === null ? '_' : v}
                       </span>
                     ))}
@@ -291,9 +286,8 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 </div>
               )}
 
-              {/* Count array for counting sort */}
               {algorithmId === 'counting' && step?.count && (
-                <div className="viz-section">
+                <div>
                   <CountDisplay
                     count={step.count}
                     countOffset={step.countOffset}
@@ -303,10 +297,9 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 </div>
               )}
 
-              {/* Buckets for bucket sort */}
               {algorithmId === 'bucket' && step?.buckets && (
-                <div className="viz-section">
-                  <div className="viz-label">Cubetas</div>
+                <div className="space-y-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+                  <div className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Cubetas</div>
                   <BucketDisplay
                     buckets={step.buckets}
                     activeBucket={step.activeBucket}
@@ -316,10 +309,9 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 </div>
               )}
 
-              {/* Buckets for radix sort */}
               {algorithmId === 'radix' && step?.buckets && (
-                <div className="viz-section">
-                  <div className="viz-label">
+                <div className="space-y-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+                  <div className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">
                     Cubetas (dígito {step.digit} — divisor: {step.currentExp})
                   </div>
                   <BucketDisplay
@@ -331,14 +323,13 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 </div>
               )}
 
-              {/* Digit indicator for radix */}
               {algorithmId === 'radix' && step?.digit && (
-                <div className="digit-indicator">
+                <div className="flex flex-wrap gap-3 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
                   {Array.from({ length: step.numDigits }, (_, i) => (
                     <div
                       key={i}
-                      className={`digit-pip ${step.digit === i + 1 ? 'digit-pip-active' : step.digit > i + 1 ? 'digit-pip-done' : ''}`}
-                      style={{ background: step.digit === i + 1 ? algo.accent : step.digit > i + 1 ? '#22c55e' : undefined }}
+                      className="flex h-10 min-w-10 items-center justify-center rounded-full border px-3 text-sm font-bold"
+                      style={{ background: step.digit === i + 1 ? algo.accent : step.digit > i + 1 ? '#22c55e' : '#0f172a', borderColor: step.digit === i + 1 ? algo.accent : step.digit > i + 1 ? '#22c55e' : '#334155' }}
                     >
                       {['U', 'D', 'C', 'M'][i] || i + 1}
                     </div>
@@ -346,28 +337,28 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 </div>
               )}
 
-              {/* Controls */}
-              <div className="sim-controls">
+              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
+                <div className="flex flex-wrap items-center justify-center gap-3">
                 <button
-                  className="ctrl-btn"
+                  className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-lg font-bold text-slate-100 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                   onClick={handleReset}
                   disabled={stepIdx === 0}
                   title="Inicio"
                 >⏮</button>
                 <button
-                  className="ctrl-btn"
+                  className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-lg font-bold text-slate-100 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                   onClick={() => goTo(stepIdx - 1)}
                   disabled={stepIdx === 0}
                   title="Paso anterior"
                 >◀</button>
 
                 {isPlaying ? (
-                  <button className="ctrl-btn ctrl-play" onClick={handlePause} style={{ background: algo.accent }}>
+                  <button className="rounded-xl border border-slate-700 px-4 py-3 text-lg font-bold text-slate-950 transition-colors" onClick={handlePause} style={{ background: algo.accent }}>
                     ⏸
                   </button>
                 ) : (
                   <button
-                    className="ctrl-btn ctrl-play"
+                    className="rounded-xl border border-slate-700 px-4 py-3 text-lg font-bold text-slate-950 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                     onClick={handlePlay}
                     disabled={stepIdx >= steps.length - 1}
                     style={{ background: isDone ? '#22c55e' : algo.accent }}
@@ -377,27 +368,28 @@ export default function SimulatorView({ algorithmId, onBack, onMenu }) {
                 )}
 
                 <button
-                  className="ctrl-btn"
+                  className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-lg font-bold text-slate-100 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                   onClick={() => goTo(stepIdx + 1)}
                   disabled={stepIdx >= steps.length - 1}
                   title="Paso siguiente"
                 >▶</button>
                 <button
-                  className="ctrl-btn"
+                  className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-lg font-bold text-slate-100 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                   onClick={() => goTo(steps.length - 1)}
                   disabled={stepIdx >= steps.length - 1}
                   title="Final"
                 >⏭</button>
+                </div>
               </div>
 
-              {/* Step scrubber */}
-              <div className="step-scrubber">
+              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4">
                 <input
                   type="range"
                   min={0}
                   max={steps.length - 1}
                   value={stepIdx}
                   onChange={e => { handlePause(); goTo(Number(e.target.value)); }}
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-800 accent-current"
                   style={{ accentColor: algo.accent }}
                 />
               </div>
